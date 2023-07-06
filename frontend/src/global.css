@@ -1,0 +1,29 @@
+:root {
+  --primary-color: rgba(78, 79, 235, 1);
+  --primary-dark-color: rgba(78, 79, 235, 0.8);
+  --secondary-color: rgba(238, 238, 238, 1);
+  --secondary-dark-color: rgba(238, 238, 238, 0.8);
+  --accent-color: rgba(6, 143, 255, 1);
+  --accent-dark-color: rgba(6, 143, 255, 0.8);
+  --text-color: rgba(0, 0, 0, 1);
+  --border-color: rgba(221, 221, 221, 1);
+  --border-dark-color: rgba(215, 215, 215, 1);
+
+  /* Extra Colors  */
+  --gray-color: rgb(32, 38, 46);
+  --red: #f44336;
+  --green: #4caf50;
+  --white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--secondary-dark-color);
+  font-size: 16px;
+}

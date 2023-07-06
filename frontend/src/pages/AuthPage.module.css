@@ -1,0 +1,41 @@
+.container {
+  margin: 0 auto;
+  padding: 20px 80px;
+  min-height: 100vh;
+}
+h1 {
+  color: var(--gray-color);
+  text-align: center;
+}
+
+.authForm {
+  padding-top: 120px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.toggle {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.authForm p {
+  margin-top: 10px;
+  max-width: 400px;
+  font-size: 12px;
+  text-align: center;
+}
+.authForm p span {
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .authForm {
+    padding-top: 120px;
+    width: 350px;
+  }
+}

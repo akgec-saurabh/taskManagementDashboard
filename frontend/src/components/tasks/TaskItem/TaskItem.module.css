@@ -1,0 +1,53 @@
+.taskItem {
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.taskItem h3,
+.taskItem p,
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonContainer button {
+  /* padding: 8px 12px; */
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+.updateButton {
+  margin-right: 10px;
+  background-color: var(--green);
+}
+
+.deleteButton {
+  background-color: var(--red);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,26 @@
+# Frontend
+frontend/node_modules/
+frontend/build/
+
+# Backend
+backend/node_modules/
+backend/dist/
+
+# Environment variables
+.env
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE-specific
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Test output
+coverage/
+
+# Add any other project-specific files or directories to ignore below this line

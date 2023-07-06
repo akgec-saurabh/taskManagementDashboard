@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  background-color: var(--primary-color);
+  padding: 10px 80px;
+}
+
+.navWrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.container h1 {
+  color: var(--white);
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  color: var(--white);
+  margin-right: 15px;
+}
+
+.authButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.login,
+.register {
+  border: 1px solid var(--white);
+  font-size: 14px;
+}
+
+.login:hover,
+.register:hover {
+  background-color: var(--white);
+  color: var(--primary-color);
+}
