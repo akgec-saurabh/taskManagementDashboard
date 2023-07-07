@@ -31,8 +31,9 @@ const getAllTaskByUserId = async (req, res, next) => {
 
   let tasks;
   try {
-    tasks = await Task.find({ assignedUsers: userId }).exec();
+    tasks = await Task.find({ "assignedUsers.userId": userId }).exec();
   } catch (error) {
+    console.log(error);
     return next(httpError("Some Errror occured while finding the tasks", 500));
   }
 
@@ -56,13 +57,13 @@ const createTask = async (req, res, next) => {
     return next(httpError("Cannot be Empty", 422));
   }
 
-  const { title, description, dueDate, status, userId } = req.body;
+  const { title, description, dueDate, status, userId, userEmail } = req.body;
   const createdTask = new Task({
     title,
     description,
     dueDate,
     status,
-    assignedUsers: [userId],
+    assignedUsers: [{ userId, userEmail }],
     assignedUsersStatus: [{ userId, status }],
     userId,
   });
@@ -85,11 +86,15 @@ const createTask = async (req, res, next) => {
     await creator.save({ session: sess });
     sess.commitTransaction();
   } catch (error) {
+    console.log(error);
     console.log(createdTask);
     return next(httpError("Error Occured while Saving Task", 500));
   }
 
-  res.status(201).json({ message: "Task Successfully Created", createdTask });
+  res.status(201).json({
+    message: "Task Successfully Created",
+    createdTask: { ...createdTask, id: createdTask.id },
+  });
 };
 
 // For Patch Task
@@ -149,7 +154,8 @@ const deleteTask = async (req, res, next) => {
 
     //Not deleting the task the task will only be able to deleted by the admin
     // await Task.deleteOne({ _id: taskId }, { session: sess });
-    task.assignedUsers.pull(userId);
+    task.assignedUsers.pull({ userId });
+    task.assignedUsersStatus.pull({ userId });
     await task.save({ session: sess });
     // Remove the task ID from assignedTasks array of the creator
     creator.assignedTasks.pull(taskId);

@@ -1,5 +1,5 @@
 .taskItem {
-  background-color: #f8f8f8;
+  background-color: var(--light-white);
   border-radius: 4px;
   padding: 15px;
   margin-bottom: 10px;

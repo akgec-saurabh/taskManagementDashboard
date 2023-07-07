@@ -1,0 +1,8 @@
+.container {
+  padding: 10px 80px;
+  min-height: calc(100vh - 44px - 84px);
+}
+.containerWrapper {
+  max-width: 1440px;
+  margin: 0px auto;
+}

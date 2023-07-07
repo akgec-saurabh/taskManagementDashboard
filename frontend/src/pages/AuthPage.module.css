@@ -1,7 +1,7 @@
 .container {
   margin: 0 auto;
   padding: 20px 80px;
-  min-height: 100vh;
+  min-height: calc(100vh - 44px - 84px);
 }
 h1 {
   color: var(--gray-color);

@@ -28,19 +28,12 @@
   margin-right: 15px;
 }
 
-.authButtons {
-  display: flex;
-  gap: 10px;
-}
-
-.login,
-.register {
+.logout {
   border: 1px solid var(--white);
   font-size: 14px;
 }
 
-.login:hover,
-.register:hover {
+.logout:hover {
   background-color: var(--white);
   color: var(--primary-color);
 }

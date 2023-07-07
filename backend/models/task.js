@@ -4,14 +4,23 @@ const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },
   dueDate: { type: Date },
-  status: { type: String, enum: ["pending", "completed"], default: "pending" },
-  assignedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  status: {
+    type: String,
+    enum: ["pending", "completed", "inprogress"],
+    default: "pending",
+  },
+  assignedUsers: [
+    {
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      userEmail: { type: String },
+    },
+  ],
   assignedUsersStatus: [
     {
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       status: {
         type: String,
-        enum: ["pending", "completed", "in_progress"],
+        enum: ["pending", "completed", "inprogress"],
         default: "pending",
       },
     },

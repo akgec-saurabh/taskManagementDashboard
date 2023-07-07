@@ -1,0 +1,44 @@
+.container {
+  position: fixed;
+  z-index: 98;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--transparent-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  min-width: 500px;
+  min-height: 300px;
+  margin: 0 auto;
+  background-color: var(--secondary-color);
+  z-index: 99;
+  position: relative;
+}
+.modal h2 {
+  padding: 20px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.modal p,
+.modal .btn {
+  margin: 20px;
+}
+
+.btn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .modal {
+    min-width: 350px;
+  }
+}

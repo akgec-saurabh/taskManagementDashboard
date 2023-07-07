@@ -55,7 +55,7 @@ const signupUser = async (req, res, next) => {
     token = jwt.sign(
       { id: createdUser.id, email: createdUser.email },
       "Super_secret_key",
-      { expiresIn: "1h" }
+      { expiresIn: "4h" }
     );
   } catch (error) {
     return next(httpError("SignUp Failed, please try again", 500));
