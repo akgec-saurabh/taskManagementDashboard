@@ -66,6 +66,7 @@ const signupUser = async (req, res, next) => {
     message: "SignUp Successfull",
     userId: createdUser.id,
     userEmail: createdUser.email,
+    role: createdUser.role,
     token: token,
   });
 };
@@ -116,6 +117,7 @@ const signinUser = async (req, res, next) => {
     message: "Signin Successfull",
     userId: existingUser.id,
     userEmail: existingUser.email,
+    role: existingUser.role,
     token: token,
   });
 };

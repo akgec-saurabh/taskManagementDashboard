@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const cors = require("cors");
+const cors = require("cors");
 
 //for https
 const https = require("https");
@@ -14,7 +14,8 @@ require("dotenv").config(); // Load environment variables from .env file
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -24,6 +25,11 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
 
   next();
+
+  // For pre-flight req
+  if (req.method === "OPTIONS") {
+    res.status(200); // Move to the next middleware for non-OPTIONS requests
+  }
 });
 
 app.use(bodyParser.json());
