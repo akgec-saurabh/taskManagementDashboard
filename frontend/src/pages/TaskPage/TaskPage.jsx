@@ -59,7 +59,7 @@ const TaskPage = () => {
   };
 
   // On Task Update
-  const onUpdateHandler = async (id) => {
+  const onUpdateHandler = async (id, title, description, dueDate, status) => {
     console.log(id);
     const response = await sendReq(
       `${process.env.REACT_APP_BASE_URL}/api/tasks/${id}`,
@@ -68,7 +68,13 @@ const TaskPage = () => {
         "Content-Type": "application/json",
         authorization: `Bearer ${authCtx.token.token}`,
       },
-      JSON.stringify({ userId: authCtx.token.userId })
+      JSON.stringify({
+        userId: authCtx.token.userId,
+        status,
+        description,
+        title,
+        dueDate,
+      })
     );
 
     if (response) {
@@ -127,7 +133,7 @@ const TaskPage = () => {
         <TaskForm onTaskAdd={onTaskAddHandler} />
 
         <TaskList
-          onUpdate={onUpdateHandler}
+          onTaskUpdate={onUpdateHandler}
           onDelete={onDeleteHandler}
           tasks={tasks}
         />

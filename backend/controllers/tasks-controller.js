@@ -64,7 +64,7 @@ const createTask = async (req, res, next) => {
     dueDate,
     status,
     assignedUsers: [{ userId, userEmail }],
-    assignedUsersStatus: [{ userId, status }],
+    assignedUsersStatus: [{ userId, status, title, description, dueDate }],
     userId,
   });
 
@@ -141,42 +141,44 @@ const deleteTask = async (req, res, next) => {
     .json({ message: "Task Removed", task: task.toObject({ getters: true }) });
 };
 
-// For Patch Task
-const updateTask = async (req, res, next) => {
-  // Express Validator Validating
-  const errors = validationResult(req);
+// // For Patch Task
+// const updateTask = async (req, res, next) => {
+//   // Express Validator Validating
+//   const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    console.log(errors);
-    return next(httpError("Cannot be Empty", 422));
-  }
+//   if (!errors.isEmpty()) {
+//     console.log(errors);
+//     return next(httpError("Cannot be Empty", 422));
+//   }
 
-  const { title, description } = req.body;
-  const taskId = req.params.tid;
+//   const { title, description } = req.body;
+//   const taskId = req.params.tid;
 
-  let task;
-  try {
-    task = await Task.findById(taskId);
-  } catch (error) {
-    return next(httpError("Some Error Occured while finding Task", 500));
-  }
-  task.title = title;
-  task.description = description;
+//   let task;
+//   try {
+//     task = await Task.findById(taskId);
+//   } catch (error) {
+//     return next(httpError("Some Error Occured while finding Task", 500));
+//   }
+//   task.title = title;
+//   task.description = description;
 
-  try {
-    await task.save();
-  } catch (error) {
-    console.log(task);
-    return next(httpError("Some Error Occured while updating", 500));
-  }
+//   try {
+//     await task.save();
+//   } catch (error) {
+//     console.log(task);
+//     return next(httpError("Some Error Occured while updating", 500));
+//   }
 
-  res.status(201).json({ message: "Task Updated" });
-};
+//   res.status(201).json({ message: "Task Updated" });
+// };
 
 // For changing the status of the task
 const updateTaskStatus = async (req, res, next) => {
   const { userId, status, title, description, dueDate } = req.body;
   const tid = req.params.tid;
+
+  console.log(tid);
 
   //finding the task
   let task;
@@ -195,6 +197,10 @@ const updateTaskStatus = async (req, res, next) => {
   );
 
   if (assignedUser) {
+    task.title = title;
+    task.description = description;
+    task.dueDate = dueDate;
+    task.status = status;
     assignedUser.title = title;
     assignedUser.description = description;
     assignedUser.dueDate = dueDate;
@@ -206,6 +212,7 @@ const updateTaskStatus = async (req, res, next) => {
   try {
     await task.save();
   } catch (error) {
+    console.log(error);
     return next(
       httpError("Some error occured, not able to change status", 500)
     );
@@ -220,6 +227,6 @@ const updateTaskStatus = async (req, res, next) => {
 exports.getTaskById = getTaskById;
 exports.getAllTaskByUserId = getAllTaskByUserId;
 exports.createTask = createTask;
-exports.updateTask = updateTask;
+// exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;
 exports.updateTaskStatus = updateTaskStatus;

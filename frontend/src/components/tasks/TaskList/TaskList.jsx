@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./TaskList.module.css";
 import TaskItem from "../TaskItem/TaskItem";
 
-const TaskList = ({ tasks, onDelete, onUpdate }) => {
+const TaskList = ({ tasks, onDelete, onTaskUpdate }) => {
   return (
     <div className={classes.continer}>
       {/* Rversing order for the latest order display first */}
@@ -18,7 +18,7 @@ const TaskList = ({ tasks, onDelete, onUpdate }) => {
               dueDate={t.dueDate}
               status={t.status}
               assignedUsers={t.assignedUsers}
-              onUpdate={onUpdate}
+              onUpdate={onTaskUpdate}
               onDelete={onDelete}
             />
           ))}
