@@ -15,14 +15,14 @@ function App() {
       <Navbar />
 
       {/* When user dont have valid token */}
-      {/* {!authCtx.isLogin && <AuthPage />} */}
+      {!authCtx.isLogin && <AuthPage />}
 
       {/* When user is logged in */}
-      {/* {authCtx.isLogin && <TaskPage />} */}
+      {authCtx.isLogin && authCtx.role === "user" && <TaskPage />}
 
-      {/* {authCtx.isLogin && authCtx.role === "admin" && <Dashboard />} */}
+      {authCtx.isLogin && authCtx.role === "admin" && <Dashboard />}
 
-      <Donut width={640} height={640} />
+      {/* <Donut width={640} height={640} /> */}
       <Footer />
     </div>
   );

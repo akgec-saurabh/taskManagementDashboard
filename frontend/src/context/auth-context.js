@@ -27,10 +27,11 @@ export const AuthContextProvider = ({ children }) => {
     if (data) {
       setIsLogin(true);
       setToken(data);
+      setRole(data.role);
     }
 
     console.log(data);
-  }, []);
+  }, [isLogin]);
 
   const onLoginHandler = useCallback((response) => {
     try {

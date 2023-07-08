@@ -225,8 +225,19 @@ const updateTaskStatus = async (req, res, next) => {
 };
 
 const getAllTasks = async (req, res, next) => {
+  console.log("GET ALL");
+  let role;
+  try {
+    role = req.headers.authorization.split(" ")[2]; // Authorization: 'Bearer role'
+    if (!role) {
+      throw new Error("Authentication failed");
+    }
+    console.log(role);
+  } catch (error) {
+    return next(httpError("Authentication failed", 401));
+  }
   // Check if the user making the request has the "admin" role
-  if (req.user.role !== "admin") {
+  if (role !== "admin") {
     return next(
       httpError("Access denied. Only admin users can access this route.", 403)
     );

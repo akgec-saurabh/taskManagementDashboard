@@ -8,6 +8,7 @@ const {
   updateTask,
   deleteTask,
   updateTaskStatus,
+  getAllTasks,
 } = require("../controllers/tasks-controller");
 
 const checkAuth = require("../middleware/check-auth");
@@ -16,6 +17,9 @@ const router = express.Router();
 
 // Checking Authentication
 router.use(checkAuth);
+
+//FOR ADMIN
+router.get("/admin", getAllTasks);
 
 router.get("/:tid", getTaskById);
 
@@ -43,9 +47,6 @@ router.patch(
 
 // To change the status of the task
 // router.patch("/:tid/status", updateTaskStatus);
-
-//FOR ADMIN
-router.get("/admin", taskController.getAllTasks);
 
 router.delete("/:tid", deleteTask);
 

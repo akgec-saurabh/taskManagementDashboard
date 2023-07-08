@@ -29,8 +29,28 @@ const TaskPage = () => {
     }
   };
 
+  const fetchAllTask = async () => {
+    const response = await sendReq(
+      `${process.env.REACT_APP_BASE_URL}/api/tasks/admin`,
+      "GET",
+      {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${authCtx.token.token} ${authCtx.token.role}`,
+      }
+    );
+
+    if (response) {
+      setTasks(response.tasks);
+      console.log(response);
+    }
+  };
+
   useEffect(() => {
-    fetchTaskById();
+    if (authCtx.role === "admin") {
+      fetchAllTask();
+    } else {
+      fetchTaskById();
+    }
   }, []);
 
   //   console.log(authCtx.token.token);
@@ -94,10 +114,12 @@ const TaskPage = () => {
       whichTaskUpdated.dueDate = response.assignedUser.dueDate;
       whichTaskUpdated.status = response.assignedUser.status;
       whichTaskUpdated.userEmail = authCtx.token.userEmail;
+      whichTaskUpdated.assignedUser = [authCtx.token.userEmail];
       console.log(whichTaskUpdated);
       const updatedTasks = tasks.filter((t) => t.id !== id);
 
       setTasks([...updatedTasks, whichTaskUpdated]);
+      console.log("This is tasks array after updation", tasks);
     }
   };
 
