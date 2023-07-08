@@ -15,7 +15,7 @@ const TaskPage = () => {
   // For Fetching Task based on the userId
   const fetchTaskById = async () => {
     const response = await sendReq(
-      `http://localhost:5000/api/tasks/user/${authCtx.token.userId}`,
+      `${process.env.REACT_APP_BASE_URL}/api/tasks/user/${authCtx.token.userId}`,
       "GET",
       {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const TaskPage = () => {
     // console.log(state);
 
     const response = await sendReq(
-      "http://localhost:5000/api/tasks/",
+      `${process.env.REACT_APP_BASE_URL}/api/tasks/`,
       "POST",
       {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const TaskPage = () => {
     console.log(id);
 
     const response = await sendReq(
-      `http://localhost:5000/api/tasks/${id}`,
+      `${process.env.REACT_APP_BASE_URL}/api/tasks/${id}`,
       "DELETE",
       {
         "Content-Type": "application/json",

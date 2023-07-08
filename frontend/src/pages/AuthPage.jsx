@@ -21,7 +21,7 @@ const AuthPage = () => {
 
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/users/auth/signin",
+        `${process.env.REACT_APP_BASE_URL}/api/users/auth/signin`,
         {
           method: "POST",
           headers: {
@@ -55,7 +55,7 @@ const AuthPage = () => {
 
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/users/auth/signup",
+        `${process.env.REACT_APP_BASE_URL}/api/users/auth/signup`,
         {
           method: "POST",
           headers: {
