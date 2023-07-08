@@ -33,12 +33,16 @@ router.post(
 
 router.patch(
   "/:tid",
-  [check("title").notEmpty(), check("description").isLength({ min: 5 })],
-  updateTask
+  [
+    check("title").notEmpty(),
+    check("description").isLength({ min: 5 }),
+    check("dueDate").isDate(),
+  ],
+  updateTaskStatus
 );
 
 // To change the status of the task
-router.patch("/:tid/status", updateTaskStatus);
+// router.patch("/:tid/status", updateTaskStatus);
 
 router.delete("/:tid", deleteTask);
 

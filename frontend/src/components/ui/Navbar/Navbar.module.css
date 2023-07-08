@@ -28,9 +28,16 @@
   margin-right: 15px;
 }
 
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rebeccapurple;
+}
+
 .authButtons .logout {
   border: 1px solid var(--white);
-  font-size: 14px;
+  font-size: inherit;
 }
 
 .authButtons .logout:hover {
@@ -39,6 +46,16 @@
 }
 
 .logoutIcon {
-  width: 16px;
-  height: 16px;
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+}
+
+@media (max-width: 480px) {
+  .logout span {
+    display: none;
+  }
+  .authButtons .logout {
+    border: none;
+  }
 }

@@ -13,11 +13,10 @@ function App() {
       <Navbar />
 
       {/* When user dont have valid token */}
-      {/* {!authCtx.isLogin && <AuthPage />} */}
+      {!authCtx.isLogin && <AuthPage />}
 
       {/* When user is logged in */}
-      {/* {authCtx.isLogin && <TaskPage />} */}
-      <TaskPage />
+      {authCtx.isLogin && <TaskPage />}
 
       <Footer />
     </div>

@@ -91,42 +91,12 @@ const createTask = async (req, res, next) => {
     return next(httpError("Error Occured while Saving Task", 500));
   }
 
+  const createdTaskObj = createdTask.toObject({ getters: true });
+
   res.status(201).json({
     message: "Task Successfully Created",
-    createdTask: { ...createdTask, id: createdTask.id },
+    createdTask: { ...createdTaskObj, id: createdTaskObj.id },
   });
-};
-
-// For Patch Task
-const updateTask = async (req, res, next) => {
-  // Express Validator Validating
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    console.log(errors);
-    return next(httpError("Cannot be Empty", 422));
-  }
-
-  const { title, description } = req.body;
-  const taskId = req.params.tid;
-
-  let task;
-  try {
-    task = await Task.findById(taskId);
-  } catch (error) {
-    return next(httpError("Some Error Occured while finding Task", 500));
-  }
-  task.title = title;
-  task.description = description;
-
-  try {
-    await task.save();
-  } catch (error) {
-    console.log(task);
-    return next(httpError("Some Error Occured while updating", 500));
-  }
-
-  res.status(201).json({ message: "Task Updated" });
 };
 
 // For Deleting the task
@@ -171,9 +141,41 @@ const deleteTask = async (req, res, next) => {
     .json({ message: "Task Removed", task: task.toObject({ getters: true }) });
 };
 
+// For Patch Task
+const updateTask = async (req, res, next) => {
+  // Express Validator Validating
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return next(httpError("Cannot be Empty", 422));
+  }
+
+  const { title, description } = req.body;
+  const taskId = req.params.tid;
+
+  let task;
+  try {
+    task = await Task.findById(taskId);
+  } catch (error) {
+    return next(httpError("Some Error Occured while finding Task", 500));
+  }
+  task.title = title;
+  task.description = description;
+
+  try {
+    await task.save();
+  } catch (error) {
+    console.log(task);
+    return next(httpError("Some Error Occured while updating", 500));
+  }
+
+  res.status(201).json({ message: "Task Updated" });
+};
+
 // For changing the status of the task
 const updateTaskStatus = async (req, res, next) => {
-  const { userId, status } = req.body;
+  const { userId, status, title, description, dueDate } = req.body;
   const tid = req.params.tid;
 
   //finding the task
@@ -193,6 +195,9 @@ const updateTaskStatus = async (req, res, next) => {
   );
 
   if (assignedUser) {
+    assignedUser.title = title;
+    assignedUser.description = description;
+    assignedUser.dueDate = dueDate;
     assignedUser.status = status;
   } else {
     return next(httpError("The task is not assined to the user", 401));
