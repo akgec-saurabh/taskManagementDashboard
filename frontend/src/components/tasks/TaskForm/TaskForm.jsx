@@ -117,7 +117,7 @@ const TaskForm = ({ onTaskAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
+    console.log("form latest state", state);
 
     // Passing all the State to the parent Task Page to handle all the logic
 

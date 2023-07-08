@@ -224,9 +224,37 @@ const updateTaskStatus = async (req, res, next) => {
   });
 };
 
+const getAllTasks = async (req, res, next) => {
+  // Check if the user making the request has the "admin" role
+  if (req.user.role !== "admin") {
+    return next(
+      httpError("Access denied. Only admin users can access this route.", 403)
+    );
+  }
+
+  let tasks;
+  try {
+    tasks = await Task.find().exec();
+  } catch (error) {
+    console.log(error);
+    return next(httpError("Some error occurred while finding the tasks", 500));
+  }
+
+  if (tasks.length === 0) {
+    return next(httpError("No tasks found", 404));
+  }
+
+  res
+    .status(200)
+    .json({ tasks: tasks.map((task) => task.toObject({ getters: true })) });
+};
+
 exports.getTaskById = getTaskById;
 exports.getAllTaskByUserId = getAllTaskByUserId;
 exports.createTask = createTask;
 // exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;
 exports.updateTaskStatus = updateTaskStatus;
+
+//For Admin
+exports.getAllTasks = getAllTasks;

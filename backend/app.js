@@ -24,11 +24,11 @@ app.use((req, res, next) => {
   );
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
 
-  next();
-
   // For pre-flight req
   if (req.method === "OPTIONS") {
-    res.status(200); // Move to the next middleware for non-OPTIONS requests
+    res.status(200).send(); // Move to the next middleware for non-OPTIONS requests
+  } else {
+    next();
   }
 });
 

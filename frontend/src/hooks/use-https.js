@@ -38,6 +38,7 @@ export const useHttpClient = () => {
       console.log("Logout");
     }
     setError(null);
+    setStatus(null);
   };
 
   return {

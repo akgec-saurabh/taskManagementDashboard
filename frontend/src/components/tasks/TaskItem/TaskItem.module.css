@@ -1,14 +1,18 @@
 .taskItem {
   background-color: var(--light-white);
   border-radius: 4px;
+
+  /* font-size: 14px; */
+  cursor: pointer;
+}
+
+.taskItemWrapper {
   padding: 15px;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* font-size: 14px; */
-  cursor: pointer;
 }
 
 .taskItem h3,
@@ -55,7 +59,7 @@
 }
 
 @media (max-width: 480px) {
-  .taskItem {
+  .taskItemWrapper {
     flex-direction: column;
   }
 

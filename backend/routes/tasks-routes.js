@@ -44,6 +44,9 @@ router.patch(
 // To change the status of the task
 // router.patch("/:tid/status", updateTaskStatus);
 
+//FOR ADMIN
+router.get("/admin", taskController.getAllTasks);
+
 router.delete("/:tid", deleteTask);
 
 module.exports = router;

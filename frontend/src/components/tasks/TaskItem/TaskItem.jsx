@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./TaskItem.module.css";
 import { ReactComponent as Delete } from "../../../assets/icons/delete.svg";
 import { ReactComponent as Update } from "../../../assets/icons/update.svg";
@@ -15,6 +15,10 @@ const TaskItem = ({
   assignedUsers,
 }) => {
   const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    setEditMode(false);
+  }, [id, title, description, dueDate, status]);
 
   const handleDelete = () => {
     console.log(id);
@@ -34,8 +38,8 @@ const TaskItem = ({
   };
 
   return (
-    <>
-      <div className={classes.taskItem}>
+    <div className={classes.taskItem}>
+      <div className={classes.taskItemWrapper}>
         <h3 className={classes.title}>{title}</h3>
         <p className={classes.description}>{description}</p>
         <p className={classes.dueDate}>{dueDate.split("T")[0]}</p>
@@ -59,7 +63,7 @@ const TaskItem = ({
         </div>
       </div>
       {editMode && <TaskForm onTaskAdd={onTaskUpdate} />}
-    </>
+    </div>
   );
 };
 

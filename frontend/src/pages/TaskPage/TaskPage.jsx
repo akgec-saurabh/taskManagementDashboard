@@ -59,8 +59,16 @@ const TaskPage = () => {
   };
 
   // On Task Update
-  const onUpdateHandler = async (id, title, description, dueDate, status) => {
+  const onUpdateHandler = async ({
+    id,
+    title,
+    description,
+    dueDate,
+    status,
+  }) => {
     console.log(id);
+
+    // // setUpdateTaskId
     const response = await sendReq(
       `${process.env.REACT_APP_BASE_URL}/api/tasks/${id}`,
       "PATCH",
@@ -78,8 +86,18 @@ const TaskPage = () => {
     );
 
     if (response) {
-      console.log("Task Added : ", response);
-      setTasks((prv) => prv.filter((t) => t.id !== id));
+      console.log(response.assignedUser);
+
+      const whichTaskUpdated = tasks.filter((t) => t.id === id);
+      whichTaskUpdated.title = response.assignedUser.title;
+      whichTaskUpdated.description = response.assignedUser.description;
+      whichTaskUpdated.dueDate = response.assignedUser.dueDate;
+      whichTaskUpdated.status = response.assignedUser.status;
+      whichTaskUpdated.userEmail = authCtx.token.userEmail;
+      console.log(whichTaskUpdated);
+      const updatedTasks = tasks.filter((t) => t.id !== id);
+
+      setTasks([...updatedTasks, whichTaskUpdated]);
     }
   };
 
@@ -105,6 +123,7 @@ const TaskPage = () => {
   return (
     <div className={classes.container}>
       {/* loading and Error Modal  */}
+
       {error && (
         <ErrorModal
           message={error}
@@ -128,7 +147,7 @@ const TaskPage = () => {
 
       <div className={classes.containerWrapper}>
         <div className={classes.nav}>
-          <div>Add Task +</div>
+          <div className={classes.addMoreTask}>Add Tasks</div>
         </div>
         <TaskForm onTaskAdd={onTaskAddHandler} />
 

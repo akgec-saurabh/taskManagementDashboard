@@ -5,6 +5,8 @@ import Navbar from "./components/ui/Navbar/Navbar";
 import AuthPage from "./pages/AuthPage";
 import AuthContext from "./context/auth-context";
 import TaskPage from "./pages/TaskPage/TaskPage";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Donut from "./components/Charts/Donut/Donut";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -13,11 +15,14 @@ function App() {
       <Navbar />
 
       {/* When user dont have valid token */}
-      {!authCtx.isLogin && <AuthPage />}
+      {/* {!authCtx.isLogin && <AuthPage />} */}
 
       {/* When user is logged in */}
-      {authCtx.isLogin && <TaskPage />}
+      {/* {authCtx.isLogin && <TaskPage />} */}
 
+      {/* {authCtx.isLogin && authCtx.role === "admin" && <Dashboard />} */}
+
+      <Donut width={640} height={640} />
       <Footer />
     </div>
   );
