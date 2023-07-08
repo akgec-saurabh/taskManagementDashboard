@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import classes from "./TaskForm.module.css";
 import Input from "../../ui/Input/Input";
 import Button from "../../ui/Button/Button";
@@ -75,6 +75,14 @@ const reducerFunc = (state, action) => {
     return { ...state, dueDate: action.payload };
   } else if (action.type === "STATUS") {
     return { ...state, status: action.payload };
+  } else if (action.type === "RESET") {
+    return {
+      title: "",
+      description: "",
+      dueDate: null,
+      status: "pending",
+      assignedUser: [],
+    };
   }
 
   return state;
@@ -84,7 +92,7 @@ const TaskForm = ({ onTaskAdd }) => {
   const [state, dispach] = useReducer(reducerFunc, {
     title: "",
     description: "",
-    dueDate: "",
+    dueDate: null,
     status: "pending",
     assignedUser: [],
   });
@@ -105,29 +113,50 @@ const TaskForm = ({ onTaskAdd }) => {
     dispach({ type: "STATUS", payload: e.target.value });
   };
 
+  // Reset when form success submitted
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(state);
 
     // Passing all the State to the parent Task Page to handle all the logic
+
+    console.log("RESETED  new state :", state);
     onTaskAdd(state);
+    //Resting the form
+    handleReset();
   };
+
+  const handleReset = () => {
+    console.log(state);
+    dispach({
+      type: "RESET",
+    });
+  };
+  useEffect(() => {}, [state]);
 
   return (
     <div className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Input onChange={onTitleChange} type="text" placeholder="Title" />
+        <Input
+          onChange={onTitleChange}
+          type="text"
+          placeholder="Title"
+          value={state.title}
+        />
         <Input
           onChange={onDescriptionChange}
           type="text"
           placeholder="Description"
+          value={state.description}
         />
-        <Input onChange={onDateChange} type="date" placeholder="Due Date" />
+
+        <Input onChange={onDateChange} type="date" placeholder="Date" />
         <select
           className={classes.status}
-          value={state.status}
           onChange={onStatusChange}
           name="status"
+          value={state.date}
         >
           <option value="pending">Pending</option>
           <option value="inprogress">In Progress</option>

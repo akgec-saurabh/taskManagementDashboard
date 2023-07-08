@@ -9,6 +9,11 @@ const Input = ({ type, placeholder, value, onChange }) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      // onFocus={(e) => {
+      //   if (e.target.placeholder === "Date") {
+      //     e.target.type = "date";
+      //   }
+      // }}
     />
   );
 };

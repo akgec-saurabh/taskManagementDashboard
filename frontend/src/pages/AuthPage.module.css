@@ -39,3 +39,9 @@ h1 {
     width: 350px;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 20px;
+  }
+}

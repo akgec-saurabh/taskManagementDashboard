@@ -28,12 +28,17 @@
   margin-right: 15px;
 }
 
-.logout {
+.authButtons .logout {
   border: 1px solid var(--white);
   font-size: 14px;
 }
 
-.logout:hover {
+.authButtons .logout:hover {
   background-color: var(--white);
   color: var(--primary-color);
+}
+
+.logoutIcon {
+  width: 16px;
+  height: 16px;
 }

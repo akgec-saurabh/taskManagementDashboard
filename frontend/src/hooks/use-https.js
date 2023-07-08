@@ -3,6 +3,7 @@ import { useState } from "react";
 export const useHttpClient = () => {
   const [loading, setLoding] = useState(false);
   const [error, setError] = useState();
+  const [status, setStatus] = useState();
 
   const sendReq = async (url, method = "GET", headers = {}, body = null) => {
     try {
@@ -15,6 +16,8 @@ export const useHttpClient = () => {
 
       const responseData = await response.json();
       if (!response.ok) {
+        console.log(response);
+        setStatus(response.status);
         throw new Error(responseData.message || "Unable to Fetch Data");
       }
 
@@ -28,6 +31,12 @@ export const useHttpClient = () => {
   };
 
   const clearError = () => {
+    console.log(error);
+
+    // If user is unathorized automatically logging him out
+    if (status === 401) {
+      console.log("Logout");
+    }
     setError(null);
   };
 
@@ -36,5 +45,6 @@ export const useHttpClient = () => {
     loading,
     error,
     clearError,
+    status,
   };
 };

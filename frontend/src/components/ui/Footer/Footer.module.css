@@ -1,13 +1,13 @@
 .container {
   width: 100%;
   background-color: var(--primary-color);
-  margin: 0px auto;
   padding: 10px 80px;
   text-align: center;
 }
 
 .containerWrapper {
   max-width: 1440px;
+  margin: 0px auto;
   color: var(--white);
 }
 

@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  /* font-size: 14px; */
   cursor: pointer;
 }
 
@@ -17,9 +17,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: inherit;
+  font-size: inherit;
 }
 
-.title {
+.taskItem .title {
   font-size: 20px;
 }
 
@@ -50,4 +52,19 @@
 .icon {
   width: 20px;
   height: 20px;
+}
+
+@media (max-width: 480px) {
+  .taskItem {
+    flex-direction: column;
+  }
+
+  .taskItem select {
+    width: 50%;
+    font-size: 16px;
+    margin: 10px 0px;
+  }
+
+  .logout {
+  }
 }

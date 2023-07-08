@@ -28,6 +28,8 @@ export const AuthContextProvider = ({ children }) => {
       setIsLogin(true);
       setToken(data);
     }
+
+    console.log(data);
   }, []);
 
   const onLoginHandler = useCallback((response) => {

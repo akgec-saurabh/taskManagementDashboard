@@ -6,3 +6,9 @@
   max-width: 1440px;
   margin: 0px auto;
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 20px;
+  }
+}

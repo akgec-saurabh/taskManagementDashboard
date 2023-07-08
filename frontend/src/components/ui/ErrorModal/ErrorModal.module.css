@@ -38,6 +38,9 @@
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: 0px 20px;
+  }
   .modal {
     min-width: 350px;
   }

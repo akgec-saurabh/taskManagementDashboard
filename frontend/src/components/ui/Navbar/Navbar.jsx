@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import classes from "./Navbar.module.css";
 import { ReactComponent as Logo } from "../../../assets/icons/logo.svg";
+import { ReactComponent as Logout } from "../../../assets/icons/logout.svg";
 import Button from "../Button/Button";
 import AuthContext from "../../../context/auth-context";
 const Navbar = () => {
@@ -15,7 +16,8 @@ const Navbar = () => {
         {authCtx.isLogin && (
           <div className={classes.authButtons}>
             <Button onClick={authCtx.onLogoutHandler} btnClass={classes.logout}>
-              Logout
+              <span>Logout</span>
+              <Logout className={classes.logoutIcon} />
             </Button>
           </div>
         )}
