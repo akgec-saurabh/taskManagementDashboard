@@ -2,10 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+//for https
+const https = require("https");
+const fs = require("fs");
+
 const taskRoutes = require("./routes/tasks-routes");
 const usersRoutes = require("./routes/users-routes");
 const httpError = require("./models/http-error");
 const { default: mongoose } = require("mongoose");
+require("dotenv").config(); // Load environment variables from .env file
 
 const app = express();
 
@@ -41,13 +46,20 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occured" });
 });
 
+// Read the SSL certificate and key files
+const options = {
+  key: fs.readFileSync(process.env.PRIVATE_KEY_PATH),
+  cert: fs.readFileSync(process.env.PRIVATE_CERTIFICATE_PATH),
+};
+
+// Connect
+
 //Connecting to DataBase
 mongoose
-  .connect(
-    "mongodb+srv://akgecsaurabh:cOQzpTlYTXodFqf8@cluster0.swtdgbn.mongodb.net/"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(5000);
+    https.createServer(options, app).listen(5000);
+    console.log("Express server with HTTPS is running on port 5000");
   })
   .catch((error) => {
     console.log(error);
