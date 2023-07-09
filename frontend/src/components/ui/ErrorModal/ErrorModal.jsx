@@ -7,6 +7,7 @@ import Card from "../Card/Card";
 const Modal = ({ title = "Error", message, onClick }) => {
   return (
     <div className={classes.container}>
+      <div onClick={onClick} className={classes.backdrop}></div>
       <Card>
         <div className={classes.modal}>
           <h2>{title}</h2>
